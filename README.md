@@ -11,3 +11,7 @@ http://www.bubuko.com/infodetail-2283915.html
 
 
 http://www.php.cn/js-tutorial-393672.html
+
+手写VUE mvvm双向数据绑定
+
+https://blog.csdn.net/alinachanchan/article/details/76952194
