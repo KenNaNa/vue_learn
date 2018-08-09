@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="">
+</head>
+<body>
+<textarea id="textarea">
+	
+</textarea>
+<button type="button" id="btn">getText</button>
+<script type="text/javascript">
+	var oTxt = document.getElementById('textarea');
+	var oBtn = document.getElementById('btn');
+
+	window.onload = function(){
+		oBtn.onclick = function(){
+			moveEnd(oTxt)
+		}
+
+	}
+	function moveEnd(obj){
+        obj.focus();
+        // 获取整个obj对象的内容（value值）
+        var len = obj.value.length;
+        if (document.selection) {
+            console.log('IE下选中文本')
+            // IE
+            var sel = obj.createTextRange();
+            // 更改范围的开始位置
+            sel.moveStart('character',len);
+            // 更改范围的结束位置，开始位置和结束位置一样即为重合
+            sel.moveEnd('character',len);
+            console.log(sel.text);
+            // 将插入点移动到当前范围的开始或结尾
+            sel.collapse();
+            // 将当前选择区置为当前对象
+            // sel.select();
+
+        } else if (typeof obj.selectionStart == 'number' && typeof obj.selectionEnd == 'number') {
+            // 其他浏览器
+            console.log('其他浏览器选中文本');
+            // 文本选中
+            // obj.setSelectionRange(len-4, len);
+            // obj.setRangeText();
+            // 设置光标位置
+            obj.selectionStart = obj.selectionEnd = len;
+        }
+    }
+</script>	
+</body>
+</html>

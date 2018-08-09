@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="">
+</head>
+<body>
+<textarea id="textarea">
+	
+</textarea>
+<button type="button" id="btn">getText</button>
+<script type="text/javascript">
+	var oTxt = document.getElementById('textarea');
+	var oBtn = document.getElementById('btn');
+
+	window.onload = function(){
+		oBtn.onclick = function(){
+			console.log(insertText(oTxt,"插入文本"))
+		}
+
+	}
+	function insertText(obj,str) {
+        if (document.selection) {
+            console.log('selection')
+            obj.focus();
+            var sel = document.selection.createRange();
+            console.log(sel)
+            // 设置或获取范围内包含的文本
+            sel.text = str;
+
+        } 
+        else if (typeof obj.selectionStart === 'number' && typeof obj.selectionEnd === 'number') {
+
+            // 这是一种复杂的方法，可一直接用上面讲到的方法代替
+
+            console.log('selectionStart/selectionEnd')
+            // console.log(window.getSelection())
+            // 获取选区的其实位置
+            var startPos = obj.selectionStart,
+            // 获取选区的结束位置
+                endPos = obj.selectionEnd,
+                // 设置光标位置
+                cursorPos = startPos,
+                // 传入obj的内容
+                tmpStr = obj.value;
+
+            console.log('startPos: ' + startPos)
+            console.log('endPos: ' + endPos)
+
+            // 插入内容
+            obj.value = tmpStr.substring(0, startPos) + str + tmpStr.substring(endPos, tmpStr.length);
+            // 光标现在位置
+            cursorPos += str.length;
+
+            console.log('obj.selectionStart: ' + obj.selectionStart)
+            console.log('obj.selectionEnd: ' + obj.selectionEnd)
+            // 重新设置选中区域
+            obj.selectionStart = obj.selectionEnd = cursorPos;
+
+        } else {
+
+            obj.value += str;
+
+        }
+    }
+</script>
+</body>
+</html>

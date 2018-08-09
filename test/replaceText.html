@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="">
+</head>
+<body>
+	<textarea id="textarea">
+		
+	</textarea>
+	<button type="button" id="btn">getText</button>
+	<script type="text/javascript">
+		var oTxt = document.getElementById('textarea');
+		var oBtn = document.getElementById('btn');
+
+	    window.onload = function() {
+
+	      oBtn.onclick = function () {
+	        changeSelectedText(oTxt, '替换文本')
+	      }
+
+	      function changeSelectedText(obj, str) {
+
+	        if (typeof obj.selectionStart === 'number' && typeof obj.selectionEnd === 'number') {
+	          // 非IE浏览器
+	          console.log("非IE：")
+	          obj.setRangeText(str);
+	          //  在未选中文本的情况下，重新设置光标位置
+	          obj.selectionStart += str.length;
+	          obj.focus()
+
+	        } else if (document.selection) {
+	          // IE浏览器
+	          console.log("IE：")
+	          obj.focus();
+	          var sel = document.selection.createRange();
+	          sel.text = str;
+	        }
+
+	      }
+	    }
+  </script>
+</body>
+</html>
