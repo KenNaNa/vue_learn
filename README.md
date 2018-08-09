@@ -4,6 +4,8 @@ vue学习
 
 vnode虚拟DOM
 
+https://segmentfault.com/a/1190000009017324
+
 https://blog.csdn.net/violetjack0808/article/category/6246882
 
 
